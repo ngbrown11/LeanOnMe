@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextInputEditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private View focusView;
 
     // Store login status
     boolean cancel;
@@ -112,14 +113,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean success = attemptLogin();
-                if(success) {
-                    /*loggedIn = true;
-                    prefs.edit().putBoolean("loggedIn", loggedIn).commit(); // Set login status to true*/
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                attemptLogin();
             }
         });
 
@@ -203,7 +197,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private boolean attemptLogin() {
+    private void attemptLogin() {
 
         /*if (mAuthTask != null) {
             return false;
@@ -217,14 +211,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        View focusView = null;
+        focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             focusView.requestFocus();
-            return false;
+            return;
         }
 
         // Check for a valid email address.
@@ -232,12 +226,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             focusView.requestFocus();
-            return false;
+            return;
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             focusView.requestFocus();
-            return false;
+            return;
         }
 
         showProgress(true);
@@ -256,20 +250,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Log.w(TAG, "signInWithEmail:failed", task.getException());
                     Toast.makeText(LoginActivity.this, R.string.auth_failed,
                             Toast.LENGTH_LONG).show();
+                    showProgress(false);
+                    focusView.requestFocus();
                     cancel = true;
+                    return;
                 }
-
-                showProgress(false);
+                else {
+                    showProgress(false);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-            return false;
-        }
 
-        return true;
     }
 
     private boolean isEmailValid(String email) {
