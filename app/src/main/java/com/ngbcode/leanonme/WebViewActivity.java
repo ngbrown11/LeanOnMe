@@ -1,6 +1,8 @@
 package com.ngbcode.leanonme;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,10 @@ public class WebViewActivity extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.webview);
         progressBar = (ProgressBar) findViewById(R.id.webview_progress);
+        // Change the color
+        progressBar.getIndeterminateDrawable().setColorFilter(
+                getResources().getColor(R.color.colorAccent),
+                PorterDuff.Mode.MULTIPLY);
 
         // Set settings and enable javascript for webpages
         webSettings = webView.getSettings();
