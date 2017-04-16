@@ -2,12 +2,12 @@ package com.ngbcode.leanonme;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,12 +21,12 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String CLASS_NAME = "com.ngbcode.leanonme.RegisterActivity";
 
     // View variables
-    private EditText emailView;
-    private EditText passwordView;
-    private EditText passwordConfirmView;
-    private EditText fnameView;
-    private EditText lnameView;
-    private EditText phoneView;
+    private TextInputEditText emailView;
+    private TextInputEditText passwordView;
+    private TextInputEditText passwordConfirmView;
+    private TextInputEditText fnameView;
+    private TextInputEditText lnameView;
+    private TextInputEditText phoneView;
 
     // Registration variables
     private String email;
@@ -42,12 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        fnameView = (EditText) findViewById(R.id.register_fname);
-        lnameView = (EditText) findViewById(R.id.register_lname);
-        phoneView = (EditText) findViewById(R.id.register_phone_number);
-        emailView = (EditText) findViewById(R.id.register_email);
-        passwordView = (EditText) findViewById(R.id.register_password);
-        passwordConfirmView = (EditText) findViewById(R.id.register_password_confirm);
+        fnameView = (TextInputEditText) findViewById(R.id.register_fname);
+        lnameView = (TextInputEditText) findViewById(R.id.register_lname);
+        phoneView = (TextInputEditText) findViewById(R.id.register_phone_number);
+        emailView = (TextInputEditText) findViewById(R.id.register_email);
+        passwordView = (TextInputEditText) findViewById(R.id.register_password);
+        passwordConfirmView = (TextInputEditText) findViewById(R.id.register_password_confirm);
 
     }
 
