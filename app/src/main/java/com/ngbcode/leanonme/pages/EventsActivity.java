@@ -46,6 +46,21 @@ public class EventsActivity extends AppCompatActivity {
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.setDate(System.currentTimeMillis(), true, true);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView cal, int year, int month, int day) {
+
+                // TODO: implement check for calendar events and display an alert dialog
+
+                int cYear = year;
+                int cMonth = month;
+                int cDay = day;
+                String selectedDate = new StringBuilder().append(cMonth + 1)
+                        .append("-").append(cDay).append("-").append(cYear)
+                        .append(" ").toString();
+            }
+        });
 
         // Manage firebase variables
         auth = FirebaseAuth.getInstance();
