@@ -35,6 +35,15 @@ public class EventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
 
+        /**
+         * TODO: change the some calendar settings, such as:
+         *
+         * calendar week number showing set to false
+         * calendar size limited to one month true
+         * calendar month changeable with arrows true
+         * */
+
+
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         calendarView.setDate(System.currentTimeMillis(), true, true);
 
@@ -55,6 +64,8 @@ public class EventsActivity extends AppCompatActivity {
             }
         };
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+        // TODO: get selected date
     }
 
     @Override
