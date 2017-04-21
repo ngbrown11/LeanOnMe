@@ -17,11 +17,13 @@ public class ChatroomActivity extends AppCompatActivity {
 
     public static final String CLASS_NAME = "com.ngbcode.leanonme.ResearchActivity";
     public static final String TAG = "Research";
+    public static final int DEFAULT_MSG_LENGTH_LIMIT = 150;
 
     // Firebase variables
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
+    //private DatabaseReference firebaseDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

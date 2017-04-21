@@ -1,6 +1,10 @@
 package com.ngbcode.leanonme;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +12,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText fnameView;
     private TextInputEditText lnameView;
     private TextInputEditText phoneView;
+    private ProgressBar progressBar;
+    private View registerFormView;
 
     // Registration variables
     private String email;
@@ -49,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         emailView = (TextInputEditText) findViewById(R.id.register_email);
         passwordView = (TextInputEditText) findViewById(R.id.register_password);
         passwordConfirmView = (TextInputEditText) findViewById(R.id.register_password_confirm);
+        progressBar = (ProgressBar) findViewById(R.id.register_progress);
 
         // Manage firebase user
         auth = FirebaseAuth.getInstance();
@@ -81,6 +89,8 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        showProgress(true);
+
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -95,9 +105,11 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, R.string.auth_failed,
                             Toast.LENGTH_SHORT).show();
                     registrationSuccessful = false;
+                    showProgress(registrationSuccessful);
                     return;
                 }
                 else {
+                    showProgress(false);
                     Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -170,5 +182,38 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStop();
         if(authStateListener != null)
             auth.removeAuthStateListener(authStateListener);
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            registerFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            registerFormView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    registerFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+            progressBar.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+            registerFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 }
