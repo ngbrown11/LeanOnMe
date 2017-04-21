@@ -284,7 +284,7 @@ public class ChatroomActivity extends AppCompatActivity {
         int id = menuItem.getItemId();
 
         // TODO: update about setting
-        
+
         if(id == R.id.fetch_config_setting) {
             fetchConfig();
             return true;
