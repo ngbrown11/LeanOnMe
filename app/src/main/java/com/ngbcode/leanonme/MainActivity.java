@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ngbcode.leanonme.pages.ChatroomActivity;
 import com.ngbcode.leanonme.pages.EventsActivity;
 import com.ngbcode.leanonme.pages.ResearchActivity;
 
@@ -84,13 +85,14 @@ public class MainActivity extends AppCompatActivity {
         sb.show();*/
     }
     public void goToChat(View view) {
-        // TODO: go to ChatActivity with a new intent
-        Snackbar sb = Snackbar.make(findViewById(R.id.chatPageButton),
+        intent = new Intent(this, ChatroomActivity.class);
+        startActivity(intent);
+        /*Snackbar sb = Snackbar.make(findViewById(R.id.chatPageButton),
                 "Currently being updated", Snackbar.LENGTH_LONG);
         View snackbarView = sb.getView();
         TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
-        sb.show();
+        sb.show();*/
     }
     public void goToJournal(View view) {
         // TODO: go to JournalActivity with a new intent

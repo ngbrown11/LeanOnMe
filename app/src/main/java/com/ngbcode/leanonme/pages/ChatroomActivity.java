@@ -125,13 +125,16 @@ public class ChatroomActivity extends AppCompatActivity {
                 String uid = profile.getUid();
 
                 // Name, email address, and profile photo Url
-
-                String email = profile.getEmail();
                 if(profile.getDisplayName() != null) {
                     username = profile.getDisplayName();
                 }
-                else {
-                    username = email;
+                if(profile.getEmail() != null) {
+                    String email = profile.getEmail();
+                    String[] splitEmail = email.split("@");
+                    String newUsername = splitEmail[0];
+                    if(username.equalsIgnoreCase(ANONYMOUS)) {
+                        username = newUsername;
+                    }
                 }
                 if(profile.getPhotoUrl() != null) {
                     photoUrl = profile.getPhotoUrl().toString();
