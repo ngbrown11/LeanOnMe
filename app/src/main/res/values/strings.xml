@@ -12,6 +12,7 @@
     <string name="logout_setting">Logout</string>
     <string name="about_setting">About</string>
     <string name="register_setting">Register</string>
+    <string name="fetch_config_setting">Fetch configs</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
