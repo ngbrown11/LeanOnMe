@@ -47,6 +47,7 @@ public class ResearchActivity extends AppCompatActivity {
         info.put("Breast Cancer Treatments", "https://www.cancer.gov/types/breast/patient/breast-treatment-pdq");
         info.put("Google", "https://www.google.com");*/
 
+        // TODO: add title to each list link
         final ListView listView = (ListView) findViewById(android.R.id.list);
         infoList.add("https://www.cancer.gov/types/breast");
         infoList.add("https://www.cancer.gov/types/breast/patient/breast-treatment-pdq");
