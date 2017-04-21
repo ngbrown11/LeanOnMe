@@ -181,11 +181,11 @@ public class ChatroomActivity extends AppCompatActivity {
 
             @Override
             protected ChatMessage parseSnapshot(DataSnapshot snapshot) {
-                ChatMessage friendlyMessage = super.parseSnapshot(snapshot);
-                if (friendlyMessage != null) {
-                    friendlyMessage.setId(snapshot.getKey());
+                ChatMessage chatMessage = super.parseSnapshot(snapshot);
+                if (chatMessage != null) {
+                    chatMessage.setId(snapshot.getKey());
                 }
-                return friendlyMessage;
+                return chatMessage;
             }
 
             @Override

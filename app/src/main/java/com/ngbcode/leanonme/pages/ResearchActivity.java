@@ -32,6 +32,8 @@ public class ResearchActivity extends AppCompatActivity {
     List<String> infoList = new ArrayList<String>();
     //List<Map<String, String>> infoList = new ArrayList<Map<String, String>>();
     Map<String, String> info = new HashMap<String, String>();
+    String[] newInfoList;
+    String[] linkNames;
 
     // Firebase variables
     private FirebaseAuth auth;
@@ -49,11 +51,23 @@ public class ResearchActivity extends AppCompatActivity {
 
         // TODO: add title to each list link
         final ListView listView = (ListView) findViewById(android.R.id.list);
-        infoList.add("https://www.cancer.gov/types/breast");
-        infoList.add("https://www.cancer.gov/types/breast/patient/breast-treatment-pdq");
-        infoList.add("https://www.google.com");
+        infoList.add("Breast Cancer (Gov site)");
+        infoList.add("Breast Cancer Types (Cancer center)");
+        infoList.add("Treatment Information (Gov site)");
+        infoList.add("Get Involved (Community)");
+        infoList.add("Breast Cancer Coach");
+        infoList.add("Breast Cancer Survivors");
+        infoList.add("Google");
         infoList.toArray();
         // infoList.add(info);
+        linkNames = new String[7];
+        linkNames[0] = "https://www.cancer.gov/types/breast";
+        linkNames[1] = "http://www.cancercenter.com/breast-cancer/types/";
+        linkNames[2] = "https://www.cancer.gov/types/breast/patient/breast-treatment-pdq";
+        linkNames[3] = "http://www.breastcancer.org/community";
+        linkNames[4] = "http://www.mybreastcancercoach.org/";
+        linkNames[5] = "http://www.thebreastcancersurvivorsnetwork.org/home0.aspx";
+        linkNames[6] = "https://www.google.com";
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, infoList);
@@ -66,6 +80,7 @@ public class ResearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ResearchActivity.this, WebViewActivity.class);
                 String url = (String) listView.getItemAtPosition(i).toString();
+                url = linkNames[i];
                 intent.putExtra("URL", url);
                 startActivity(intent);
             }

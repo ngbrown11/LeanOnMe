@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button chatButton;
     Button journalButton;
     Intent intent;
+    ImageView imageView;
 
     // Firebase variables
     private FirebaseAuth auth;
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         eventsButton = (Button) findViewById(R.id.eventsPageButton);
         chatButton = (Button) findViewById(R.id.chatPageButton);
         journalButton = (Button) findViewById(R.id.journalPageButton);
+
+        // Edit breast cancer logo
+        imageView = (ImageView) findViewById(R.id.imageView);
+        //imageView.setAlpha(0.25f);
 
         // Manage firebase variables
         auth = FirebaseAuth.getInstance();
